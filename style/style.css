@@ -69,3 +69,13 @@ body > main > h1
     text-decoration: underline;
     font-style: italic;
 }
+ul {
+    background: #3399ff;
+    padding: 20px;
+    font-size: x-large;
+
+  }
+  ul li {
+    background: #cce5ff;
+    margin: 5px;
+  }

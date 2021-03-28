@@ -69,7 +69,7 @@ function render()
     midAsset.alt=Asset.all[midAssett].name;
     midAsset.title = Asset.all[midAssett].name;
   }
-
+  enableDisable();
   // handelClick();
 }
 
@@ -80,6 +80,7 @@ function render()
 assetSection.addEventListener('click',handelClick);
 function handelClick(event)
 {
+  console.log(event);
   if (event.target.id !== 'assets-section')
   {
     if (event.target.id === rightAsset.id)
@@ -88,8 +89,10 @@ function handelClick(event)
       Asset.all[rightAssett].views++;
       Asset.all[leftAssett].views++;
       Asset.all[midAssett].views++;
+      render();
 
       counterClick++;
+      // enableDisable();
     }
     else if (event.target.id === leftAsset.id)
     {
@@ -97,8 +100,10 @@ function handelClick(event)
       Asset.all[rightAssett].views++;
       Asset.all[leftAssett].views++;
       Asset.all[midAssett].views++;
+      render();
 
       counterClick++;
+      // enableDisable();
     }
     else if (event.target.id === midAsset.id)
     {
@@ -106,8 +111,10 @@ function handelClick(event)
       Asset.all[rightAssett].views++;
       Asset.all[leftAssett].views++;
       Asset.all[midAssett].views++;
+      render();
 
       counterClick++;
+
     }
 
   }
@@ -123,36 +130,36 @@ function getRandomNumber(min, max) {
 }
 
 render();
-handelClick();
-
-// let listView = document.getElementById('list');
-// listView.addEventListener('click',listVieww);
-// function listVieww (){
-
-//   const unOrderList = document.createElement('ul');
-//   listView.appendChild(unOrderList);
-//   for (let i = 0; i < assets.length; i++){
-//     let listItem = document.createElement('li');
-//     unOrderList.appendChild(listItem);
-//     listItem.textContent = ` ${Asset.all[i].name},'had'  ${Asset.all[i].votes}votes,'and was seen' ${Asset.all[i].views}'times'`;
 
 
-//   // console.log(Asset.all[i].name);
-//   }
-//   let btnSubmit = document.getElementById('click');
-//   btnSubmit.addEventListener('click',enableDisable);
-//   function enableDisable() {
-//   //Reference the Button.
+let listView = document.getElementById('list');
+listView.addEventListener('click',listVieww);
+function listVieww (){
+
+  const unOrderList = document.createElement('ul');
+  listView.appendChild(unOrderList);
+  for (let i = 0; i < assets.length; i++){
+    let listItem = document.createElement('li');
+    unOrderList.appendChild(listItem);
+    listItem.textContent = ` ${Asset.all[i].name}  had  ${Asset.all[i].votes}  votes,    and was seen  ${Asset.all[i].views}   times`;
 
 
-//     //Verify the TextBox value.
-//     if (counterClick === 5 ) {
-//     //Enable the TextBox when TextBox has value.
-//       btnSubmit.disabled = false;
-//     // listView();
-//     }
+  }
+}
+let btnSubmit = document.getElementById('btnSubmit');
+btnSubmit.addEventListener('click',enableDisable);
+function enableDisable() {
+  //Reference the Button.
 
-//   }
-//   enableDisable();
-//   listVieww ();
+
+  //Verify the TextBox value.
+  if (counterClick === 4 ) {
+    //Enable the TextBox when TextBox has value.
+    btnSubmit.disabled = false;
+    listVieww();
+  }
+
+}
+//
+// listVieww ();
 // }
