@@ -1,15 +1,18 @@
 'use strict';
+
 const assets = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 // let tempArr = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 let totalOfVotes=[];
 let totalOfViews=[];
 
+
 const leftAsset = document.getElementById('left-asset');
 const midAsset = document.getElementById('mid-asset');
 const rightAsset = document.getElementById('right-asset');
 const assetSection = document.getElementById('assets-section');
 let numberOfRound = 25;
+
 
 let counterClick = 1;
 
@@ -25,7 +28,10 @@ function Asset(name) {
 
 
 
+
+
 }
+
 Asset.all = [];
 Asset.tempAsset =[];
 
@@ -106,14 +112,18 @@ function render() {
     // midAssett = getRandomNumber(0, Asset.tempAsset.length - 1);
 
     // firstShow.push(midAssett);
+
     leftAsset.src = Asset.all[leftAssett].path;
     leftAsset.alt=Asset.all[leftAssett].name;
     leftAsset.title = Asset.all[leftAssett].name;
 
 
+
+
     rightAsset.src = Asset.all[rightAssett].path;
     rightAsset.alt=Asset.all[rightAssett].name;
     rightAsset.title = Asset.all[rightAssett].name;
+
 
 
     midAsset.src = Asset.all[midAssett].path;
@@ -138,41 +148,53 @@ function render() {
 
 
 
+
 assetSection.addEventListener('click', handelClick);
 function handelClick(event) {
   console.log(event);
   if (event.target.id !== 'assets-section') {
     if (event.target.id === rightAsset.id) {
+
       Asset.all[rightAssett].votes++;
       Asset.all[rightAssett].views++;
       Asset.all[leftAssett].views++;
       Asset.all[midAssett].views++;
+
       
 
       counterClick++;
       
     }
     else if (event.target.id === leftAsset.id) {
+
       Asset.all[leftAssett].votes++;
       Asset.all[rightAssett].views++;
       Asset.all[leftAssett].views++;
       Asset.all[midAssett].views++;
+
      
 
       counterClick++;
      
     }
     else if (event.target.id === midAsset.id) {
+
       Asset.all[midAssett].votes++;
       Asset.all[rightAssett].views++;
       Asset.all[leftAssett].views++;
       Asset.all[midAssett].views++;
+
       
+
+      render();
+
 
       counterClick++;
 
     }
+
     render();
+
   }
 
 
@@ -188,6 +210,7 @@ function getRandomNumber(min, max) {
 
 
 
+
 let listView = document.getElementById('list');
 listView.addEventListener('click', listVieww);
 function listVieww() {
@@ -197,6 +220,7 @@ function listVieww() {
   for (let i = 0; i < assets.length; i++) {
     Asset.totalOfVotes.push(Asset.all[i].votes);
     Asset.totalOfViews.push(Asset.all[i].views);
+
     let listItem = document.createElement('li');
     unOrderList.appendChild(listItem);
     listItem.textContent = ` ${Asset.all[i].name}  had  ${Asset.all[i].votes}  votes,    and was seen  ${Asset.all[i].views}   times`;
@@ -205,6 +229,7 @@ function listVieww() {
   }
 }
 let btnSubmit = document.getElementById('btnSubmit');
+
 btnSubmit.addEventListener('click', enableDisable);
 function enableDisable() {
  
