@@ -1,19 +1,20 @@
 'use strict';
-const assets = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass' ];
+const assets = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','usb.gif','water-can.jpg','wine-glass.jpg' ];
 
 const leftAsset = document.getElementById('left-asset');
 const midAsset = document.getElementById('mid-asset');
 const rightAsset = document.getElementById('right-asset');
 const assetSection = document.getElementById('assets-section');
-
+let numberOfRound = 25;
 let leftAssett;
 let rightAssett;
 let midAssett;
-let counterClick =0;
+let counterClick =1;
 function Asset(name)
 {
   this.name=name;
-  this.path=`./assets/${name}.jpg`;
+
+  this.path=`./assets/${name}`;
   this.votes=0;
   this.views=0;
   Asset.all.push(this);
@@ -34,42 +35,69 @@ function render()
 {
 
   leftAssett= getRandomNumber(0,Asset.all.length-1);
-
-
-
-  leftAsset.src = Asset.all[leftAssett].path;
-  leftAsset.alt=Asset.all[leftAssett].name;
-  leftAsset.title = Asset.all[leftAssett].name;
-
   rightAssett= getRandomNumber(0,Asset.all.length-1);
-  if (leftAssett !== rightAssett )
-  {
-    rightAsset.src = Asset.all[rightAssett].path;
-    rightAsset.alt=Asset.all[rightAssett].name;
-    rightAsset.title = Asset.all[rightAssett].name;
-  }
-  else
-  {
-    rightAssett= getRandomNumber(0,Asset.all.length-1);
-    rightAsset.src = Asset.all[rightAssett].path;
-    rightAsset.alt=Asset.all[rightAssett].name;
-    rightAsset.title = Asset.all[rightAssett].name;
-  }
   midAssett= getRandomNumber(0,Asset.all.length-1);
-  if (midAssett !== leftAssett && midAssett !== rightAssett)
+
+
+  console.log('before');
+
+  while ( leftAssett !== rightAssett && leftAssett !== midAssett && rightAssett !== midAssett)
   {
+
+
+    leftAsset.src = Asset.all[leftAssett].path;
+    leftAsset.alt=Asset.all[leftAssett].name;
+    leftAsset.title = Asset.all[leftAssett].name;
+
+    rightAsset.src = Asset.all[rightAssett].path;
+    rightAsset.alt=Asset.all[rightAssett].name;
+    rightAsset.title = Asset.all[rightAssett].name;
+
     midAsset.src = Asset.all[midAssett].path;
     midAsset.alt=Asset.all[midAssett].name;
     midAsset.title = Asset.all[midAssett].name;
-  }
-  else
-  {
+
+    leftAssett= getRandomNumber(0,Asset.all.length-1);
+    rightAssett= getRandomNumber(0,Asset.all.length-1);
     midAssett= getRandomNumber(0,Asset.all.length-1);
-    midAsset.src = Asset.all[midAssett].path;
-    midAsset.alt=Asset.all[midAssett].name;
-    midAsset.title = Asset.all[midAssett].name;
+    continue;
+
+
+    // leftAssett= getRandomNumber(0,Asset.all.length-1);
+    // rightAssett= getRandomNumber(0,Asset.all.length-1);
+    // midAssett= getRandomNumber(0,Asset.all.length-1);
   }
+  console.log('after');
+  // rightAssett= getRandomNumber(0,Asset.all.length-1);
+  // if (leftAssett !== rightAssett )
+  // {
+  //   rightAsset.src = Asset.all[rightAssett].path;
+  //   rightAsset.alt=Asset.all[rightAssett].name;
+  //   rightAsset.title = Asset.all[rightAssett].name;
+  // }
+  // else
+  // {
+  //   rightAssett= getRandomNumber(0,Asset.all.length-1);
+  //   rightAsset.src = Asset.all[rightAssett].path;
+  //   rightAsset.alt=Asset.all[rightAssett].name;
+  //   rightAsset.title = Asset.all[rightAssett].name;
+  // }
+  // midAssett= getRandomNumber(0,Asset.all.length-1);
+  // if (midAssett !== leftAssett && midAssett !== rightAssett)
+  // {
+  //   midAsset.src = Asset.all[midAssett].path;
+  //   midAsset.alt=Asset.all[midAssett].name;
+  //   midAsset.title = Asset.all[midAssett].name;
+  // }
+  // else
+  // {
+  //   midAssett= getRandomNumber(0,Asset.all.length-1);
+  //   midAsset.src = Asset.all[midAssett].path;
+  //   midAsset.alt=Asset.all[midAssett].name;
+  //   midAsset.title = Asset.all[midAssett].name;
+  // }
   enableDisable();
+
   // handelClick();
 }
 
@@ -153,10 +181,11 @@ function enableDisable() {
 
 
   //Verify the TextBox value.
-  if (counterClick === 4 ) {
+  if (counterClick === numberOfRound ) {
     //Enable the TextBox when TextBox has value.
     btnSubmit.disabled = false;
     listVieww();
+    assetSection.removeEventListener('click',handelClick);
   }
 
 }
